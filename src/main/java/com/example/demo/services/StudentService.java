@@ -40,4 +40,10 @@ public class StudentService {
 		return null;
 	}
 
+	public Student getAllFromSP3() {
+		var s = studentRepository.getAllFromSP3(5);
+		System.out.println(s);
+		return s;
+	}
+
 }

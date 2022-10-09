@@ -20,14 +20,22 @@ public class StudentController {
 		return studentService.getAll();
 	}
 
+	//working
 	@GetMapping("/student-sp")
 	public Student getAllFromSP() {
 		return studentService.getAllFromSP();
 	}
-
+	
+	// currently not working
 	@GetMapping("/student-sp2")
 	public List<Student> getAllFromSP2() {
 		return studentService.getAllFromSP2();
+	}
+
+	//working
+	@GetMapping("/student-sp3")
+	public Student getAllFromSP3() {
+		return studentService.getAllFromSP3();
 	}
 
 }

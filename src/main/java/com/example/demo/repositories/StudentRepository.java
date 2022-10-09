@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.models.Student;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository
 @Transactional
@@ -33,6 +34,20 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	Map<String, Object> getAllFromSP(Integer s_id);
 
 	@Procedure(name = "student.getAll")
-	Student getAllFromSP2(Integer s_id);
+	Map<String, Object> getAllFromSP2(Integer s_id);
+
+	default Student getAllFromSP3(Integer s_id) {
+		// Can call Spring Data methods!
+		var s = getAllFromSP(s_id);
+
+		// Can write your own!
+		// MUST BE MOVED TO SOME OTHER CLASS
+		if (s != null) {
+			final ObjectMapper mapper = new ObjectMapper(); // jackson's objectmapper
+			final Student pojo = mapper.convertValue(s, Student.class);
+			return pojo;
+		}
+		return null;
+	}
 
 }
